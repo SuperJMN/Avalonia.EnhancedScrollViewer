@@ -3,15 +3,13 @@ using Avalonia.Input;
 
 namespace ScrollViewerTest;
 
-public class CustomScrollBar : ScrollBar
+public class EnhancedScrollBar : ScrollBar
 {
     protected override void OnPointerEntered(PointerEventArgs e)
     {
-        base.OnPointerEntered(e);
     }
 
     protected override void OnPointerExited(PointerEventArgs e)
     {
-        base.OnPointerExited(e);
     }
 }

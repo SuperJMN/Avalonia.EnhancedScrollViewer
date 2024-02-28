@@ -8,8 +8,5 @@
         Title="ScrollViewerTest">
     <ScrollViewer PointerEntered="InputElement_OnPointerEntered">
         <Border Background="Red" Width="10000" Height="1000" />
-        <Interaction.Behaviors>
-            <scrollViewerTest:FullClientAreScrollBarExpansion></scrollViewerTest:FullClientAreScrollBarExpansion>
-        </Interaction.Behaviors>
     </ScrollViewer>
 </Window>

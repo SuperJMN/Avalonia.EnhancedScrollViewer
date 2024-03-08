@@ -38,8 +38,7 @@ public class ScrollBarExpansionBehavior : AttachedToVisualTreeBehavior<ScrollBar
 
         serialDisposable.DisposeWith(disposable);
 
-        var observable = parentScrollViewer.GetObservable(Expansion.AreaProperty);
-        observable
+        parentScrollViewer.GetObservable(Expansion.HotAreaProperty)
             .Select(GetExpansionType)
             .Select(x => CreateStrategy(AssociatedObject!, x))
             .Do(s => serialDisposable.Disposable = s)
@@ -47,13 +46,13 @@ public class ScrollBarExpansionBehavior : AttachedToVisualTreeBehavior<ScrollBar
             .DisposeWith(disposable);
     }
 
-    private static Type GetExpansionType(ExpansionType expansionType)
+    private static Type GetExpansionType(ExpansionArea expansionArea)
     {
-        return expansionType switch
+        return expansionArea switch
         {
-            ExpansionType.ScrollBar => typeof(ScrollBarClientAreaExpansionStrategy),
-            ExpansionType.ScrollViewer => typeof(ScrollViewerClientAreaExpansionStrategy),
-            _ => throw new ArgumentOutOfRangeException(nameof(expansionType), expansionType, null)
+            ExpansionArea.ScrollBar => typeof(ScrollBarClientAreaExpansionStrategy),
+            ExpansionArea.ScrollViewer => typeof(ScrollViewerClientAreaExpansionStrategy),
+            _ => throw new ArgumentOutOfRangeException(nameof(expansionArea), expansionArea, null)
         };
     }
 }

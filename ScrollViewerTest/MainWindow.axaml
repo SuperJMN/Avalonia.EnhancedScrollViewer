@@ -6,7 +6,20 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ScrollViewerTest.MainWindow"
         Title="ScrollViewerTest">
-    <ScrollViewer s:Expansion.Area="ScrollBar" s:Expansion.HideAfter="00:00:5">
-        <Border Width="10000" Height="10000" />
-    </ScrollViewer>
+	<Grid RowDefinitions="* *" Width="600">
+
+        <DockPanel Margin="10">
+            <TextBlock Text="HotArea=ScrollViewer" DockPanel.Dock="Top" />
+            <ScrollViewer Background="Aquamarine" s:Expansion.HotArea="ScrollViewer" s:Expansion.HideAfter="00:00:1">
+                <Border Width="10000" Height="10000" />
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel Grid.Row="1" Margin="10">
+            <TextBlock Text="HotArea=ScrollBar" DockPanel.Dock="Top" />
+            <ScrollViewer s:Expansion.HotArea="ScrollBar" Background="Khaki"  s:Expansion.HideAfter="00:00:2">
+                <Border Width="10000" Height="10000" />
+            </ScrollViewer>
+        </DockPanel>
+	</Grid>
 </Window>

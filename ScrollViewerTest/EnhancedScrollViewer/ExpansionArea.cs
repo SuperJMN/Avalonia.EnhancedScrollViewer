@@ -1,6 +1,6 @@
 namespace ScrollViewerTest.EnhancedScrollViewer;
 
-public enum ExpansionType
+public enum ExpansionArea
 {
     ScrollBar = 0,
     ScrollViewer

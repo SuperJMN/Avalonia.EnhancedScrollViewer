@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Avalonia.Controls.Primitives;
+using Avalonia.ReactiveUI;
 
 namespace ScrollViewerTest.EnhancedScrollViewer;
 
@@ -27,14 +27,16 @@ public class ScrollBarClientAreaExpansionStrategy : ScrollViewerExpansionStrateg
         .Subscribe()
         .DisposeWith(disposables);
 
+        var hideAfter = scrollBar.GetValue(Expansion.HideAfterProperty);
+        
         Observable.FromEventPattern(scrollBar, "PointerExited")
-            .Delay(TimeSpan.FromSeconds(1), Scheduler.CurrentThread)
+            .Delay(hideAfter, AvaloniaScheduler.Instance)
             .Do(_ =>
             {
                 isExpandedProperty.SetValue(scrollBar, false);
             })
             .Subscribe()
-            .DisposeWith(disposables);;
+            .DisposeWith(disposables);
     }
 
     public override void Dispose()

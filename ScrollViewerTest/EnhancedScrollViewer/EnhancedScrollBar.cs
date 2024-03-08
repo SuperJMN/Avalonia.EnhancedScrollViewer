@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 
-namespace ScrollViewerTest;
+namespace ScrollViewerTest.EnhancedScrollViewer;
 
 public class EnhancedScrollBar : ScrollBar
 {

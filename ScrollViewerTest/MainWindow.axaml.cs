@@ -1,18 +1,11 @@
 using Avalonia.Controls;
-using Avalonia.Input;
 
-namespace ScrollViewerTest
+namespace ScrollViewerTest;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
-        private void InputElement_OnPointerEntered(object? sender, PointerEventArgs e)
-        {
-            
-        }
+        InitializeComponent();
     }
 }

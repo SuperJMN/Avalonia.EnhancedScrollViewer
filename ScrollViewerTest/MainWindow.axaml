@@ -2,11 +2,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:scrollViewerTest="clr-namespace:ScrollViewerTest"
+        xmlns:s="clr-namespace:ScrollViewerTest.EnhancedScrollViewer"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ScrollViewerTest.MainWindow"
         Title="ScrollViewerTest">
-    <ScrollViewer PointerEntered="InputElement_OnPointerEntered">
-        <Border Background="Red" Width="10000" Height="1000" />
+    <ScrollViewer s:Expansion.Area="ScrollViewer">
+        <Border Width="10000" Height="10000" />
     </ScrollViewer>
 </Window>

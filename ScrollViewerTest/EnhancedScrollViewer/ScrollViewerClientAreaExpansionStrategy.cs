@@ -1,22 +1,23 @@
 ﻿using System;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
+using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using ReactiveUI;
 
-namespace ScrollViewerTest;
+namespace ScrollViewerTest.EnhancedScrollViewer;
 
-public class ScrollBarClientAreaExpansionStrategy : ScrollViewerExpansionStrategy
+public class ScrollViewerClientAreaExpansionStrategy : ScrollViewerExpansionStrategy
 {
     private readonly ScrollBar scrollBar;
 
-    public ScrollBarClientAreaExpansionStrategy(ScrollBar scrollBar)
+    public ScrollViewerClientAreaExpansionStrategy(ScrollBar scrollBar)
     {
         this.scrollBar = scrollBar;
-        
+
         var isExpandedProperty = typeof(ScrollBar).GetProperty("IsExpanded");
-        
-        this.WhenAnyValue(x => x.scrollBar)
+
+        this.WhenAnyValue(x => x.scrollBar.TemplatedParent)
+            .OfType<ScrollViewer>()
             .Select(x => Observable.FromEventPattern(x, "PointerEntered"))
             .Switch()
             .Do(pattern =>
@@ -24,11 +25,12 @@ public class ScrollBarClientAreaExpansionStrategy : ScrollViewerExpansionStrateg
                 isExpandedProperty.SetValue(scrollBar, true);
             })
             .Subscribe();
-        
-        this.WhenAnyValue(x => x.scrollBar)
-            .Select(x => Observable.FromEventPattern(x, "PointerExited").Delay(TimeSpan.FromSeconds(1), Scheduler.CurrentThread))
+
+        this.WhenAnyValue(x => x.scrollBar.TemplatedParent)
+            .OfType<ScrollViewer>()
+            .Select(x => Observable.FromEventPattern(x, "PointerExited"))
             .Switch()
-            .Do(_ =>
+            .Do(pattern =>
             {
                 isExpandedProperty.SetValue(scrollBar, false);
             })
